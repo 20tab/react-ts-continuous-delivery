@@ -1,12 +1,17 @@
 {
-  "name": "{{cookiecutter.project_slug}}",
+  "name": "test",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
-    "fix": "eslint . --fix"
+    "fix": "eslint . --fix",
+    "bash": "docker exec -it manager_frontend bash",
+    "test": "jest test",
+    "test:watch": "jest --watch",
+    "contract": "jest test pact.spec.js && node publish.pact.js",
+    "contract:publish": "node publish.pact.js"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.4.0",
@@ -24,15 +29,25 @@
     "styled-normalize": "^8.0.7"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.12.1",
+    "@pact-foundation/pact": "^9.13.0",
+    "@pact-foundation/pact-node": "^10.11.0",
+    "@testing-library/jest-dom": "^5.11.4",
     "@types/basic-auth": "^1.1.3",
+    "@types/enzyme": "^3.10.7",
     "@types/express": "^4.17.8",
+    "@types/jest": "^26.0.15",
     "@types/node": "^14.11.8",
     "@types/react": "^16.9.52",
     "@types/react-redux": "^7.1.9",
     "@types/styled-components": "^5.1.4",
     "@typescript-eslint/eslint-plugin": "^4.4.1",
     "@typescript-eslint/parser": "^4.4.1",
+    "axios": "^0.20.0",
     "babel-plugin-styled-components": "^1.11.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.5",
+    "enzyme-to-json": "^3.6.1",
     "eslint": "^7.11.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-config-standard-react": "^9.2.0",
@@ -41,6 +56,15 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.21.4",
     "eslint-plugin-standard": "^4.0.1",
+    "jest": "^26.6.1",
+    "react-is": "^17.0.1",
+    "ts-jest": "^26.4.1",
+    "ts-node": "^9.0.0",
     "typescript": "^4.0.3"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>/__test__/setupEnzyme.ts"
+    ]
   }
 }
