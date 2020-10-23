@@ -7,12 +7,14 @@
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
     "fix": "eslint . --fix",
-    "bash": "docker exec -it manager_frontend bash",
+    "bash": "docker exec -it {{cookiecutter.project_slug}}_frontend bash",
     "test": "jest test",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "coverage": "jest test --coverage --watchAll=false"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.4.0",
+    "axios": "^0.20.0",
     "basic-auth": "^2.0.1",
     "express": "^4.17.1",
     "next": "9.5.5",
@@ -38,7 +40,7 @@
     "@types/styled-components": "^5.1.4",
     "@typescript-eslint/eslint-plugin": "^4.4.1",
     "@typescript-eslint/parser": "^4.4.1",
-    "axios": "^0.20.0",
+    "babel-plugin-react-remove-properties": "^0.3.0",
     "babel-plugin-styled-components": "^1.11.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",

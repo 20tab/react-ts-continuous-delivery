@@ -6,7 +6,7 @@ import { WithNavbar } from '../components/templates/WithNavbar'
 const Home: FC = () => {
   return (
     <WithNavbar>
-      <Container>
+      <Container data-test='home-container'>
         <Title>Hello world!</Title>
         <Text>Start editing <Code>pages/index.tsx</Code></Text>
       </Container>
