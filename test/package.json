@@ -10,7 +10,8 @@
     "bash": "docker exec -it {{cookiecutter.project_slug}}_frontend bash",
     "test": "jest test",
     "test:watch": "jest --watch",
-    "coverage": "jest test --coverage --watchAll=false"
+    "coverage": "jest test --coverage --watchAll=false",
+    "contract": "jest test pact.spec.js && node ./__test__/publish.pact.js"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.4.0",
@@ -44,6 +45,7 @@
     "@typescript-eslint/parser": "^4.4.1",
     "babel-plugin-react-remove-properties": "^0.3.0",
     "babel-plugin-styled-components": "^1.11.1",
+    "dotenv": "^8.2.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",
     "enzyme-to-json": "^3.6.1",
@@ -64,7 +66,7 @@
   },
   "jest": {
     "setupFilesAfterEnv": [
-      "<rootDir>/__test__/setupEnzyme.ts"
+      "<rootDir>/__test__/setup.ts"
     ]
   }
 }
