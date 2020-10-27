@@ -1,6 +1,6 @@
 import axios from 'axios'
 import adapter from 'axios/lib/adapters/http'
-import { eachLike, like } from '@pact-foundation/pact/dsl/matchers'
+import { like } from '@pact-foundation/pact/dsl/matchers'
 import { provider } from '../setup'
 
 axios.defaults.adapter = adapter
@@ -9,15 +9,15 @@ describe('API Pact test', () => {
   beforeAll(() => provider.setup())
   afterEach(() => provider.verify())
   afterAll(() => provider.finalize())
-  describe('get planned task list', () => {
-    test('planned tasks exist', async () => {
+  describe('show user name on home page', () => {
+    test('get user name', async () => {
       // set up Pact interactions
       await provider.addInteraction({
-        state: 'planned tasks exist',
-        uponReceiving: 'get planned task list',
+        state: 'get user name',
+        uponReceiving: 'show user name on home page',
         withRequest: {
           method: 'GET',
-          path: '/api/v2/projects/plannedtask/',
+          path: '/api/user/',
           headers: {
             'X-CSRFToken': like('GobO8MkFvzxFDSsQtooUdTsGFvJon1J7osep8vdxQ5MhNhjXZiLLSi7QiNAJZwU6')
           }
@@ -27,39 +27,25 @@ describe('API Pact test', () => {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: eachLike({
-            creation_datetime: '2020-07-27T13:06:31.887460',
-            description: '',
-            id: 1,
-            notes: '',
-            order: 211,
-            start: '2020-07-27T13:05:00',
-            stop: '2020-07-27T20:05:00',
-            user: 13
+          body: like({
+            name: 'John Doe'
           })
         }
       })
 
       // make request to Pact mock server
-      const plannedTask = await axios.get(`${provider.mockService.baseUrl}/api/v2/projects/plannedtask/`, {
+      const plannedTask = await axios.get(`${provider.mockService.baseUrl}/api/user/`, {
         headers: {
           'X-CSRFToken': 'GobO8MkFvzxFDSsQtooUdTsGFvJon1J7osep8vdxQ5MhNhjXZiLLSi7QiNAJZwU6',
           'Content-Type': 'application/json'
         }
       })
 
-      expect(plannedTask.data).toStrictEqual([
+      expect(plannedTask.data).toStrictEqual(
         {
-          creation_datetime: '2020-07-27T13:06:31.887460',
-          description: '',
-          id: 1,
-          notes: '',
-          order: 211,
-          start: '2020-07-27T13:05:00',
-          stop: '2020-07-27T20:05:00',
-          user: 13
+          name: 'John Doe'
         }
-      ])
+      )
     })
   })
 })
