@@ -60,6 +60,7 @@
     "jest": "^26.6.1",
     "jest-pact": "^0.8.1",
     "react-is": "^17.0.1",
+    "redux-mock-store": "^1.5.4",
     "ts-jest": "^26.4.1",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.3"
