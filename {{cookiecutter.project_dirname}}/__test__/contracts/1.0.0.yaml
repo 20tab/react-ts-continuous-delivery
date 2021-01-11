@@ -1,0 +1,62 @@
+openapi: 3.0.3
+info:
+  title: 'Il mio primo contratto'
+  version: 1.0.0
+paths:
+  '/login':
+    post:
+      operationId: 'login'
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                  format: password
+            examples:
+              username:
+                summary: Your username
+                value: carmelo
+              password:
+                summary: Your password
+                value: qweqwe
+      responses:
+        200:
+          description: a token to be returned
+          content:
+            'application/json':
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    format: byte
+                    example: qwea9d2e2j3nkndsoa09
+                required: ['token']
+        400:
+          description: an error to be returned
+          content:
+            'application/json':
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: 'Generic error'
+                required: ['detail']
+        401:
+          description: an unauthorized error to be returned
+          content:
+            'application/json':
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: 'Unhautorized'
+                required: ['detail']

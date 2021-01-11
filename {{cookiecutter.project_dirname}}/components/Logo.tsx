@@ -1,11 +1,12 @@
 import React, { FC } from 'react'
-import { useSelector } from '../utils/hooks/redux'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 
+import { State } from '../models/State'
 import { Theme } from '../models/Theme'
 
 const Logo: FC = (props) => {
-  const theme = useSelector(state => state.theme)
+  const theme = useSelector<State, Theme>(state => state.theme)
   const isLight = theme === Theme.light
   const imageSrc = isLight ? '/images/logo.png' : '/images/logo_negative.png'
 
